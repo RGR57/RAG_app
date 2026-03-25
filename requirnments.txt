@@ -1,5 +1,5 @@
-streamlit
-pypdf
-cohere
-groq
-numpy
+streamlit==1.32.0
+pypdf==4.1.0
+cohere==5.3.5
+groq==0.5.0
+numpy==1.26.4
