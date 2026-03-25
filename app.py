@@ -1,5 +1,5 @@
 import streamlit as st
-from PyPDF2 import PdfReader
+import pdfplumber
 import cohere
 import numpy as np
 import time
@@ -15,10 +15,10 @@ if uploaded_file is not None:
     st.success("PDF uploaded successfully!")
     
     # Read PDF
-    reader = PdfReader(io.BytesIO(uploaded_file.getvalue()))
-    full_text = ""
-    for page in reader.pages:
-        full_text += page.extract_text()
+    with pdfplumber.open(io.BytesIO(uploaded_file.getvalue())) as pdf:
+        full_text = ""
+        for page in pdf.pages:
+            full_text += page.extract_text() or ""
     
     # Split into chunks
     chunks = []
